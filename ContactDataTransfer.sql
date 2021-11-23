@@ -47,7 +47,7 @@ from SalesLT.Customer c
 LEFT OUTER JOIN  SalesLT.CustomerAddress ca on C.CustomerID=CA.CustomerID
 LEFT OUTER join SalesLT.Address a ON ca.AddressID = a.AddressID
 ) customer
-where customer.RowId=2 and EmailAddress not in (SELECT dbo.Leads.email from dbo.Leads) 
+where customer.RowId=1 and EmailAddress not in (SELECT dbo.Leads.email from dbo.Leads) 
 and EmailAddress is not null and EmailAddress !=''
 
 --below we will check after transfering data from Donation system and SalesLT if the data from Donation
