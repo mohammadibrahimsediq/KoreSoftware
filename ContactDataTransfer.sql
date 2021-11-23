@@ -24,7 +24,7 @@ FROM
 (
 SELECT salutation, firstname, lastname,emailaddress1, company, address1_composite,
 address1_city, address1_stateorprovince,address1_postalcode, address1_country, telephone1,
-Row_number() over (partition by emailaddress1 order by contactid) RowId
+Row_number() over (partition by emailaddress1 order by contactid desc) RowId
 from 
 dbo.ContactData
 --in below condition for donotphone I used not equal to 'true' because it can be empty or other value as the data type is varchar
@@ -42,7 +42,7 @@ AddressLine1, City, StateProvince, PostalCode, CountryRegion, Phone
 from (
 select  C.CustomerID, c.Title, c.FirstName, c.LastName,c.EmailAddress, c.CompanyName,
 a.AddressLine1, a.City, a.StateProvince, a.PostalCode, a.CountryRegion, c.Phone,
-Row_number() over (partition by c.EmailAddress order by C.CustomerId) as RowId 
+Row_number() over (partition by c.EmailAddress order by C.CustomerId desc) as RowId 
 from SalesLT.Customer c 
 LEFT OUTER JOIN  SalesLT.CustomerAddress ca on C.CustomerID=CA.CustomerID
 LEFT OUTER join SalesLT.Address a ON ca.AddressID = a.AddressID
